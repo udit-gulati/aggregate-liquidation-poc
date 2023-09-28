@@ -14,8 +14,10 @@ use neutron_sdk::{
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 
-use crate::{state::{Config, CONFIG, State, STATE}, execute::{execute_borrow, execute_liquidate, execute_add_market, execute_remove_market}};
-use crate::msg::{ExecuteMsg, InstantiateMsg, MigrateMsg};
+use crate::state::{Config, CONFIG, State, STATE};
+use crate::query::{query_info, query_state, query_config};
+use crate::msg::{ExecuteMsg, InstantiateMsg, QueryMsg, MigrateMsg};
+use crate::execute::{execute_borrow, execute_liquidate, execute_add_market, execute_remove_market};
 
 // Default timeout for IbcTransfer is 10000000 blocks
 const DEFAULT_TIMEOUT_HEIGHT: u64 = 10000000;
@@ -38,7 +40,6 @@ pub fn instantiate(
         contract_addr: env.contract.address.clone(),
         gas_denom: msg.gas_denom,
         usdc_denom: msg.usdc_denom,
-        markets: Vec::new(),
         epoch_period: msg.epoch_period,
         dev_fee: msg.dev_fee.unwrap_or(10000), // default: 10% of rewards
         dev_address: msg.dev_address,
@@ -87,8 +88,8 @@ pub fn execute(
             market_contract,
         } => execute_add_market(deps, env, market_id, market_name, market_contract),
         ExecuteMsg::RemoveMarket {
-            market_id,
-        } => execute_remove_market(deps, env, market_id),
+            market_contract,
+        } => execute_remove_market(deps, env, market_contract),
     }
 }
 
@@ -100,14 +101,8 @@ pub fn query(
 ) -> StdResult<Binary> {
     match _msg {
         QueryMsg::Info {} => query_info(deps),
-        // QueryMsg::SeatomExchangeRate {} => query_seatom_exchange_rate(deps),
-        // QueryMsg::BatomExchangeRate {} => query_batom_exchange_rate(deps),
-        // QueryMsg::QueryDevFee {} => query_dev_fee(deps),
-        // QueryMsg::Window {} => query_current_window(deps),
-        // QueryMsg::Undelegations { address } => query_pending_claims(deps, address),
-        // QueryMsg::UserClaimable { address } => query_user_claimable(deps, address),
-        // QueryMsg::ValidatorList {} => query_top_validators(deps),
-        // QueryMsg::ActiveUnbonding { address } => query_active_undelegation(deps, address),
+        QueryMsg::State {} => query_state(deps),
+        QueryMsg::Config {} => query_config(deps),
     }
 }
 

@@ -4,6 +4,7 @@ use serde::{Deserialize, Serialize};
 
 pub const STATE: Item<State> = Item::new("state");
 pub const CONFIG: Item<Config> = Item::new("config");
+pub const MARKETS: Map<Addr, Market> = Map::new("markets");
 pub const USER_POSITIONS: Map<Addr, Position> = Map::new("user_positions");
 
 #[derive(Serialize, Debug, Deserialize, Clone, PartialEq)]
@@ -38,7 +39,8 @@ pub struct Colletral {
 #[derive(Serialize, Debug, Deserialize, Clone, PartialEq)]
 pub struct Market {
     pub market_id: u128,
-    pub market_chain: Chain,
+    pub market_name: String,
+    // pub market_chain: Chain,
     pub market_colletrals: Vec<Colletral>,
 }
 
@@ -50,7 +52,6 @@ pub struct Config {
 
     /// lending/borrowing related values
     pub usdc_denom: String,
-    pub markets: Vec<Market>,
     pub epoch_period: u64,  // period of position rebalance
 
     /// platform fee related values

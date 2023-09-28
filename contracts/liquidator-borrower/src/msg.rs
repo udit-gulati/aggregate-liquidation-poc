@@ -33,7 +33,36 @@ pub enum ExecuteMsg {
         market_contract: Addr,
     },
     RemoveMarket {
-        market_id: u128,
+        market_contract: Addr,
+    },
+}
+
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
+pub enum QueryMsg {
+    Info {},
+    State {},
+    Config {},
+}
+
+#[derive(Serialize, Deserialize, Clone, Debug, JsonSchema)]
+#[serde(rename_all = "snake_case")]
+pub enum QueryResponse {
+    Info {
+        admin: Addr,
+    },
+    State {
+        positions_count: u128,
+        total_usdc_borrowed: Uint128,
+    },
+    Config {
+        admin: Addr,
+        contract_addr: Addr,
+        gas_denom: String,
+        usdc_denom: String,
+        epoch_period: u64,
+        dev_address: Addr,
+        dev_fee: u64,
+        paused: bool,
     },
 }
 
