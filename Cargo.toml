@@ -4,7 +4,7 @@ members = [
     "contracts/neutron-interchain-queries",
     "contracts/neutron-interchain-txs",
     "contracts/ica-helper",
-    "contracts/liquidator-borrower",
+    "contracts/adapters/mars-osmosis-adapter",
 ]
 
 [profile.release]

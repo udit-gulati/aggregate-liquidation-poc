@@ -144,7 +144,7 @@ module.exports = {
     version: "1.68.2",
   },
   commands: {
-    compile: "RUSTFLAGS='-C link-arg=-s' cargo build --release --target wasm32-unknown-unknown",
+    compile: "RUSTFLAGS='-C link-arg=-s' cargo build --lib --release --target wasm32-unknown-unknown",
     schema: "cargo run --example schema",
   }
 };
