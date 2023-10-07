@@ -3,3 +3,12 @@ nibiru:
     codeId: 1
     contractCodeHash: not_required
     deployTimestamp: Sat Oct 07 2023 13:24:14 GMT+0530 (India Standard Time)
+umee:
+  deployInfo:
+    codeId: 4
+    contractCodeHash: not_required
+    deployTimestamp: Sat Oct 07 2023 15:46:51 GMT+0530 (India Standard Time)
+  instantiateInfo:
+    - instantiateTag: default_instantiate
+      contractAddress: umee1ghd753shjuwexxywmgs4xz7x2q732vcnkm6h2pyv9s6ah3hylvrqsgm7t9
+      instantiateTimestamp: Sat Oct 07 2023 15:46:51 GMT+0530 (India Standard Time)
