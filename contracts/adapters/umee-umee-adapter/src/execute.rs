@@ -147,18 +147,3 @@ pub fn try_withdraw(
         // .add_attribute("exchange_rate", state.exchange_rate.to_string())
     )
 }
-
-pub fn try_liquidate(
-    deps: DepsMut,
-    _env: Env,
-    info: MessageInfo,
-    position_id: Uint128,
-) -> Result<Response, ContractError> {
-    let mut messages: Vec<CosmosMsg> = vec![];
-
-    deps.api.debug("liquidation done successfully");
-    Ok(Response::new()
-        .add_messages(messages)
-        .add_attribute("position_id", position_id.to_string())
-    )
-}

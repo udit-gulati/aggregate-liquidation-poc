@@ -7,7 +7,7 @@ use cosmwasm_std::{
 
 use crate::error::ContractError;
 use crate::query::{query_config, query_state};
-use crate::execute::{try_deposit, try_withdraw, try_liquidate};
+use crate::execute::{try_deposit, try_withdraw};
 use crate::state::{Config, State, CONFIG, STATE};
 use crate::msg::{ExecuteMsg, InstantiateMsg, QueryMsg};
 // use crate::red_bank::{RedBankQueryMsg, MarketResponse};
@@ -74,9 +74,6 @@ pub fn execute(
         ExecuteMsg::WithdrawCollateral {
             collateral_amount,
         } => try_withdraw(deps, env, info, collateral_amount),
-        ExecuteMsg::LiquidatePosition {
-            position_id,
-        } => try_liquidate(deps, env, info, position_id),
 
         // ExecuteMsg::UpdateYieldBearingDenom { yield_bearing_denom } =>
         //     try_update_yield_bearing_denom(deps, info, yield_bearing_denom),

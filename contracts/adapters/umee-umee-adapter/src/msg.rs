@@ -23,10 +23,6 @@ pub enum ExecuteMsg {
         collateral_amount: Uint128,
     },
 
-    LiquidatePosition {
-        position_id: Uint128,
-    },
-
     // UpdateYieldBearingDenom {
     //     yield_bearing_denom: String,
     // },
